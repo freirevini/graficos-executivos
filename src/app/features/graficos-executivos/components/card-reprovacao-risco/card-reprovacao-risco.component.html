@@ -1,0 +1,56 @@
+<div class="composicao">
+  <div class="composicao__tela">
+    <canvas
+      baseChart
+      role="img"
+      [attr.aria-label]="descricaoAcessivel"
+      type="doughnut"
+      [data]="dados"
+      [options]="opcoes"
+      [plugins]="plugins"
+      (chartClick)="aoClicarNoGrafico($event)">
+    </canvas>
+  </div>
+
+  <ul class="composicao__legenda">
+    <li *ngFor="let fatia of fatias">
+      <button
+        type="button"
+        class="composicao__item"
+        [class.composicao__item--selecionado]="selecionado === fatia.chave"
+        [class.composicao__item--recuado]="selecionado && selecionado !== fatia.chave"
+        [attr.aria-pressed]="selecionado === fatia.chave"
+        (click)="riscoAlternado.emit(fatia.chave)">
+        <span class="composicao__ponto" [style.background]="fatia.cor" aria-hidden="true"></span>
+        <span class="composicao__rotulo" [title]="fatia.rotulo">{{ fatia.rotulo }}</span>
+        <span class="composicao__valores">
+          <span class="composicao__percentual">{{ fatia.percentualDoTotal | number: '1.0-0' : 'pt-BR' }}%</span>
+          <span class="composicao__contagem">{{ fatia.reprovadas }}</span>
+        </span>
+        <span class="apenas-leitor-tela">
+          {{ selecionado === fatia.chave ? 'Remover recorte por' : 'Recortar a página por' }} {{ fatia.rotulo }}
+        </span>
+      </button>
+    </li>
+  </ul>
+
+  <table class="apenas-leitor-tela">
+    <caption>Composição das peças reprovadas por tipo de risco atrelado</caption>
+    <thead>
+      <tr>
+        <th scope="col">Risco</th>
+        <th scope="col">Reprovadas</th>
+        <th scope="col">% do total de reprovadas</th>
+        <th scope="col">Taxa de reprovação no risco</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fatia of fatias">
+        <th scope="row">{{ fatia.rotulo }}</th>
+        <td>{{ fatia.reprovadas }}</td>
+        <td>{{ fatia.percentualDoTotal | number: '1.1-1' : 'pt-BR' }}%</td>
+        <td>{{ fatia.percentualReprovacao | number: '1.1-1' : 'pt-BR' }}%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

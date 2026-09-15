@@ -1,0 +1,122 @@
+.volume {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+// --- KPI do topo — mesma lógica/estilo dos outros cards ---------------------
+// Cor NÃO invertida (diferente do card de risco): aqui o número é volume de
+// peças, igual ao card "Origem × resultado" — alta é boa (verde), queda é
+// ruim (vermelho).
+.volume__kpi {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--cf-borda-suave);
+}
+
+.volume__kpi-valor { font-size: 1.75rem; font-weight: 700; color: var(--cf-texto); }
+.volume__kpi-sufixo { font-size: 0.8125rem; color: var(--cf-texto-secundario); }
+
+.volume__kpi-variacao {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-left: auto;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--cf-aprovado);
+}
+
+.volume__kpi-variacao mat-icon {
+  align-self: center;
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
+}
+
+.volume__kpi-variacao--queda { color: var(--cf-reprovado); }
+
+.volume__kpi-legenda {
+  font-weight: 400;
+  color: var(--cf-texto-secundario);
+}
+
+.volume__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+}
+
+.volume__cabecalho {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.volume__produto { font-size: 0.8125rem; font-weight: 600; color: var(--cf-texto); }
+
+.volume__percentual {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cf-texto-secundario);
+  white-space: nowrap;
+}
+
+.volume__percentual--alerta { color: var(--cf-reprovado); }
+
+.volume__barra {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--cf-borda-suave);
+  overflow: hidden;
+}
+
+.volume__preenchimento {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.volume__rodape {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+  font-size: 0.6875rem;
+  color: var(--cf-texto-secundario);
+}
+
+// --- Item clicável: recorta a página pelo produto -----------------------------
+.volume__item {
+  display: block;
+  width: 100%;
+  padding: 4px 6px;
+  margin: 0 -6px;
+  font: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: var(--cf-raio-pequeno);
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.volume__item:hover { background: var(--cf-fundo); }
+
+.volume__item--selecionado {
+  background: var(--cf-info-fundo);
+
+  .volume__produto, .volume__percentual { font-weight: 700; }
+}
+
+// Os demais recuam quando há um recorte, para o selecionado ficar evidente.
+.volume__item--recuado { opacity: 0.45; }

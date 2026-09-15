@@ -1,0 +1,15 @@
+<div class="correlacao">
+  <div class="correlacao__tela">
+    <canvas
+      baseChart
+      role="img"
+      [attr.aria-label]="descricaoAcessivel"
+      type="bar"
+      [data]="dados"
+      [options]="opcoes"
+      [plugins]="plugins"
+      (chartClick)="aoClicar($event)">
+    </canvas>
+  </div>
+
+</div>

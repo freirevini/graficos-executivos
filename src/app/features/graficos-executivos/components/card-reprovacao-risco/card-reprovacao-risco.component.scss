@@ -1,0 +1,98 @@
+.composicao {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 100%;
+}
+
+// --- Donut ------------------------------------------------------------------
+// Total e variação são desenhados no vazado pelo plugin `totalCentral`; não há
+// faixa de texto separada acima nem abaixo.
+.composicao__tela {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  margin: 4px auto 0;
+}
+
+// --- Legenda: uma linha por risco -------------------------------------------
+// Rótulo à esquerda, % e contagem à direita, separadores discretos — mesmo
+// ritmo de linha das listas dos cards "Origem × resultado" e "Total por
+// produto", para os três lerem como um bloco só.
+.composicao__legenda {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Linha da legenda é um botão: clicar recorta a página por aquele risco.
+.composicao__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 6px;
+  margin: 0 -6px;
+  font: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--cf-borda-suave);
+  border-radius: var(--cf-raio-pequeno);
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.composicao__item:hover { background: var(--cf-fundo); }
+
+.composicao__item--selecionado {
+  background: var(--cf-info-fundo);
+  .composicao__rotulo, .composicao__percentual { font-weight: 700; }
+}
+
+// Os demais recuam quando há um recorte, para o selecionado ficar evidente.
+.composicao__item--recuado { opacity: 0.45; }
+
+.composicao__legenda li:first-child .composicao__item { border-top: 0; }
+
+.composicao__ponto {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+// min-width: 0 permite o truncamento; sem isso o flex item não encolhe e o
+// nome longo do risco empurraria os números para fora do card.
+.composicao__rotulo {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  color: var(--cf-texto);
+}
+
+.composicao__valores {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.composicao__percentual {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--cf-texto);
+}
+
+.composicao__contagem {
+  min-width: 28px;
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--cf-texto-secundario);
+}

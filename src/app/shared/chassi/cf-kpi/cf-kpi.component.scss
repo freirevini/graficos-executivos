@@ -1,0 +1,88 @@
+.cf-kpi {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 148px;
+  padding: 18px 20px 0;
+  overflow: hidden;
+  background: var(--cf-superficie);
+  border: 1px solid var(--cf-borda-suave);
+  border-radius: var(--cf-raio);
+  box-shadow: var(--cf-sombra);
+}
+
+.cf-kpi__topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cf-kpi__textos { min-width: 0; }
+
+.cf-kpi__rotulo {
+  margin: 0 0 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--cf-texto-secundario);
+}
+
+.cf-kpi__valor {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--cf-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.cf-kpi__sufixo { font-size: 1.125rem; font-weight: 600; margin-left: 2px; }
+
+// Badge do ícone: fundo tonal do próprio tom do card.
+.cf-kpi__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--cf-raio-pequeno);
+}
+
+.cf-kpi__badge mat-icon { font-size: 22px; width: 22px; height: 22px; }
+
+.cf-kpi__variacao {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 10px 0 0;
+  font-size: 0.75rem;
+}
+
+.cf-kpi__seta { font-size: 16px; width: 16px; height: 16px; }
+.cf-kpi__delta { font-weight: 700; }
+.cf-kpi__comparativo { color: var(--cf-texto-secundario); font-weight: 400; }
+
+.cf-kpi__variacao--boa { color: var(--cf-aprovado); }
+.cf-kpi__variacao--ruim { color: var(--cf-reprovado); }
+.cf-kpi__variacao--neutra { color: var(--cf-texto-secundario); }
+
+// Sparkline sangra até as bordas inferiores do card.
+.cf-kpi__sparkline {
+  position: relative;
+  height: 46px;
+  margin: 12px -20px 0;
+}
+
+// --- Tons -------------------------------------------------------------------
+// `--cf-kpi-<tom>` também é lido pelo TypeScript para colorir o sparkline.
+.cf-kpi--neutro { --cf-kpi-cor: var(--cf-kpi-neutro); --cf-kpi-fundo: var(--cf-kpi-neutro-fundo); }
+.cf-kpi--aprovado { --cf-kpi-cor: var(--cf-kpi-aprovado); --cf-kpi-fundo: var(--cf-kpi-aprovado-fundo); }
+.cf-kpi--reprovado { --cf-kpi-cor: var(--cf-kpi-reprovado); --cf-kpi-fundo: var(--cf-kpi-reprovado-fundo); }
+.cf-kpi--atencao { --cf-kpi-cor: var(--cf-kpi-atencao); --cf-kpi-fundo: var(--cf-kpi-atencao-fundo); }
+
+.cf-kpi__badge {
+  color: var(--cf-kpi-cor);
+  background: var(--cf-kpi-fundo);
+}

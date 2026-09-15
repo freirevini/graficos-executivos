@@ -1,0 +1,70 @@
+<div class="canais" [attr.aria-label]="descricaoAcessivel">
+  <div class="canais__kpi">
+    <span class="canais__kpi-valor">{{ totalGeral | number: '1.0-0' : 'pt-BR' }}</span>
+    <span class="canais__kpi-variacao" *ngIf="variacaoGeral !== null" [class.canais__kpi-variacao--queda]="variacaoGeral < 0">
+      <mat-icon aria-hidden="true">{{ variacaoGeral >= 0 ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+      {{ variacaoGeral >= 0 ? '+' : '' }}{{ variacaoGeral | number: '1.1-1' : 'pt-BR' }}%
+      <span class="canais__kpi-legenda">vs. período anterior</span>
+    </span>
+  </div>
+
+  <div class="canais__tickbar" role="img" [attr.aria-label]="'Distribuição de ' + totalGeral + ' peças entre ' + linhas.length + ' origens'">
+    <span class="canais__traco" *ngFor="let traco of tracos" [style.background]="traco.cor"></span>
+  </div>
+
+  <table class="canais__tabela">
+    <caption class="apenas-leitor-tela">Resultado das avaliações por canal de origem</caption>
+    <thead>
+      <tr>
+        <th scope="col">Origem</th>
+        <th scope="col" class="canais__col-numerica">Total</th>
+        <th scope="col" class="canais__col-numerica">Reprovado</th>
+        <th scope="col" class="canais__col-numerica">%</th>
+        <th scope="col" class="canais__col-numerica">
+          Δ mês anterior
+          <span class="apenas-leitor-tela">variação da taxa de reprovação vs. período anterior</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let linha of linhas"
+        class="canais__linha"
+        [class.canais__linha--selecionada]="selecionada === linha.chave"
+        [class.canais__linha--recuada]="selecionada && selecionada !== linha.chave"
+        [attr.aria-selected]="selecionada === linha.chave"
+        tabindex="0"
+        role="button"
+        (click)="origemAlternada.emit(linha.chave)"
+        (keydown.enter)="origemAlternada.emit(linha.chave)"
+        (keydown.space)="$event.preventDefault(); origemAlternada.emit(linha.chave)">
+        <th scope="row">
+          <span class="canais__ponto" [style.background]="linha.cor" aria-hidden="true"></span>
+          {{ linha.rotulo }}
+          <span class="apenas-leitor-tela">
+            {{ selecionada === linha.chave ? 'Remover recorte por' : 'Recortar a página por' }} {{ linha.rotulo }}
+          </span>
+        </th>
+        <td class="canais__col-numerica">{{ linha.total }}</td>
+        <td class="canais__col-numerica">{{ linha.reprovadas }}</td>
+        <td class="canais__col-numerica">{{ linha.percentualReprovacao | number: '1.1-1' : 'pt-BR' }}%</td>
+        <td class="canais__col-numerica">
+          <span
+            *ngIf="linha.variacaoTaxaReprovacao !== null; else semVariacao"
+            class="canais__delta"
+            [class.canais__delta--queda]="linha.variacaoTaxaReprovacao < 0"
+            [class.canais__delta--alta]="linha.variacaoTaxaReprovacao > 0"
+            [class.canais__delta--igual]="linha.variacaoTaxaReprovacao === 0">
+            <mat-icon aria-hidden="true">
+              {{ linha.variacaoTaxaReprovacao === 0 ? 'remove' : (linha.variacaoTaxaReprovacao < 0 ? 'arrow_downward' : 'arrow_upward') }}
+            </mat-icon>
+            {{ linha.variacaoTaxaReprovacao >= 0 ? '+' : '' }}{{ linha.variacaoTaxaReprovacao | number: '1.1-1' : 'pt-BR' }}%
+          </span>
+          <ng-template #semVariacao>
+            <span class="canais__delta canais__delta--indisponivel">—</span>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

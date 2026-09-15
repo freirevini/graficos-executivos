@@ -1,0 +1,123 @@
+// -----------------------------------------------------------------------------
+// PALETA / DESIGN TOKENS — Conforme
+//
+// Valores fornecidos pelo time do produto. Este é o ÚNICO arquivo a tocar para
+// re-tematizar: nenhum componente de gráfico carrega hex no TypeScript, todos
+// leem estas custom properties em runtime via LeitorPaletaService.
+//
+// CORREÇÕES APLICADAS sobre a lista original (typos):
+//   - Perfil Admin ...... `#@d47a1` -> `#0d47a1`
+//   - Info/duplicado .... `#1565ce` -> `#1565c0`  (alinhado ao "Azul hover")
+//
+// ACESSIBILIDADE — a paleta dos gráficos usa tons suavizados, validados com o
+// verificador de paleta (banda de luminosidade, piso de croma, separação sob
+// daltonismo e piso de visão normal: todos passam).
+//
+// A exceção conhecida é `--grf-linha-percentual` / `--cf-kpi-atencao`
+// (#c9a13c), que rende ~2,4:1 sobre branco — abaixo do mínimo de 3:1 para
+// objeto gráfico. É inerente a um âmbar claro, e a compensação exigida está
+// no lugar: cada ponto da linha carrega o valor em rótulo visível, então a
+// leitura nunca depende da cor. Se algum dia precisar passar em auditoria
+// estrita, o candidato mais próximo que atinge 3:1 é #8a6d03.
+//
+// ACESSIBILIDADE: os tokens `*-forte` existem porque o âmbar de "Inconclusivo"
+// (#f57f17) rende apenas 2,5:1 sobre #fff8e1 e 2,65:1 sobre branco — reprova em
+// WCAG AA para texto (4,5:1) e em 3:1 para marca gráfica. O hex original segue
+// disponível para preenchimento de badge; texto, borda e série de gráfico usam
+// a variante forte. Ver README, seção "Acessibilidade".
+// -----------------------------------------------------------------------------
+
+:root {
+  // --- Principal -----------------------------------------------------------
+  --cf-azul-acao: #1976d2;   // 4,61:1 sobre branco — AA para texto
+  --cf-azul-hover: #1565c0;
+  --cf-azul-escuro: #0d47a1;
+
+  // --- Base ----------------------------------------------------------------
+  --cf-fundo: #fafafa;
+  --cf-superficie: #ffffff;
+  --cf-texto: #212121;
+  --cf-texto-alt: #333333;
+  --cf-texto-secundario: #666666;
+  --cf-texto-secundario-alt: #757575;
+  --cf-borda: #e0e0e0;
+  --cf-borda-suave: #eceff1;
+
+  // --- Status (fundo + tinta) ----------------------------------------------
+  --cf-aprovado-fundo: #e8f5e9;
+  --cf-aprovado: #2e7d32;            // 5,13:1 sobre branco — AA
+  --cf-reprovado-fundo: #ffebee;
+  --cf-reprovado: #c62828;           // 5,62:1 sobre branco — AA
+  --cf-inconclusivo-fundo: #fff8e1;
+  --cf-inconclusivo: #f57f17;        // marca do produto — só preenchimento
+  --cf-inconclusivo-forte: #8a5300;  // 5,10:1 — texto, borda e série
+  --cf-info-fundo: #e3f2fd;
+  --cf-info: #1565c0;
+  --cf-erro-fundo: #fff5f5;
+  --cf-erro: #d32f2f;
+
+  // --- Perfis --------------------------------------------------------------
+  --cf-perfil-admin-fundo: #e3f2fd;
+  --cf-perfil-admin: #0d47a1;
+  --cf-perfil-compliance-fundo: #ede7f6;
+  --cf-perfil-compliance: #4527a0;
+  --cf-perfil-marketing-fundo: #e8f5e9;
+  --cf-perfil-marketing: #1b5e20;
+
+  // --- Marca BV (login / logos / realces) ----------------------------------
+  --bv-azul-inicio: #2f89c7;
+  --bv-azul-fim: #305393;
+  --bv-ciano: #31c7ed;
+  --bv-ciano-claro: #5ccbe1;
+  --bv-magenta-inicio: #a3225c;
+  --bv-magenta-fim: #d42245;
+  --bv-gradiente-azul: linear-gradient(135deg, #2f89c7 0%, #305393 100%);
+  --bv-gradiente-magenta: linear-gradient(135deg, #a3225c 0%, #d42245 100%);
+
+  // --- Série categórica dos gráficos ---------------------------------------
+  // Derivada da paleta acima. Toda cor >= 3:1 sobre a superfície branca (mínimo
+  // WCAG para objeto gráfico) e ordenada para permanecer distinguível em
+  // deuteranopia/protanopia (alterna matiz E luminância).
+  --grf-cor-1: #1976d2; // 4,61:1
+  --grf-cor-2: #a3225c; // 6,89:1
+  --grf-cor-3: #2e7d32; // 5,13:1
+  --grf-cor-4: #4527a0; // 9,72:1
+  --grf-cor-5: #2f89c7; // 3,80:1
+  --grf-cor-6: #d42245; // 5,10:1
+  --grf-cor-7: #305393; // 8,23:1
+  --grf-cor-8: #8a5300; // 5,10:1
+
+  // --- Séries de resultado nos gráficos ------------------------------------
+  // Tokens SEPARADOS dos status semânticos (--cf-aprovado / --cf-reprovado):
+  // os gráficos usam o azul institucional para "aprovadas", enquanto o selo da
+  // tabela mantém o verde de status. Trocar um não arrasta o outro.
+  --grf-aprovadas: #3f5fc9;        // tom suavizado; 5,4:1 sobre branco
+  --grf-reprovadas: #cc6363;       // tom suavizado; 3,8:1
+  --grf-linha-percentual: #c9a13c; // tom suavizado; ver nota de contraste abaixo
+
+  // --- Tons dos cards de KPI -----------------------------------------------
+  // Precisam viver em :root (e não numa classe) porque CfKpiComponent resolve
+  // `--cf-kpi-<tom>` via getComputedStyle para colorir o sparkline.
+  --cf-kpi-neutro: #1976d2;
+  --cf-kpi-aprovado: #002bab;
+  --cf-kpi-reprovado: #c62828;
+  --cf-kpi-atencao: #c9a13c;
+
+  --cf-kpi-neutro-fundo: rgba(25, 118, 210, 0.12);
+  --cf-kpi-aprovado-fundo: rgba(0, 43, 171, 0.12);
+  --cf-kpi-reprovado-fundo: rgba(198, 40, 40, 0.12);
+  --cf-kpi-atencao-fundo: rgba(201, 161, 60, 0.14);
+
+  // --- Estrutura do gráfico ------------------------------------------------
+  --grf-grade: #eceff1;
+  --grf-eixo-texto: #666666;
+  --grf-tooltip-fundo: #212121;
+  --grf-realce: #f57f17; // contorno do mês selecionado no cross-filter
+
+  // --- Layout --------------------------------------------------------------
+  --cf-raio: 12px;
+  --cf-raio-pequeno: 8px;
+  --cf-sombra: 0 1px 2px rgba(33, 33, 33, 0.06), 0 2px 8px rgba(33, 33, 33, 0.06);
+  --cf-sombra-realce: 0 2px 6px rgba(25, 118, 210, 0.18);
+  --cf-espaco: 16px;
+}

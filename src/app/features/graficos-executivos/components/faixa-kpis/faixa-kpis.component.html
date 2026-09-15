@@ -1,0 +1,46 @@
+<div class="kpis" role="group" aria-label="Indicadores do período">
+  <cf-kpi
+    rotulo="Total de peças"
+    tom="neutro"
+    icone="description"
+    [valor]="kpis?.totalPecas ?? null"
+    [carregando]="carregando"
+    [variacaoPercentual]="variacaoTotal"
+    [serie]="serieTotal">
+  </cf-kpi>
+
+  <cf-kpi
+    rotulo="Peças aprovadas"
+    tom="aprovado"
+    icone="task_alt"
+    [valor]="kpis?.pecasAprovadas ?? null"
+    [carregando]="carregando"
+    [variacaoPercentual]="variacaoAprovadas"
+    [serie]="serieAprovadas">
+  </cf-kpi>
+
+  <cf-kpi
+    rotulo="Reprovadas"
+    tom="reprovado"
+    icone="cancel"
+    [valor]="kpis?.pecasReprovadas ?? null"
+    [carregando]="carregando"
+    [altaEhRuim]="true"
+    [variacaoPercentual]="variacaoReprovadas"
+    [serie]="serieReprovadas">
+  </cf-kpi>
+
+  <cf-kpi
+    rotulo="% de reprovação"
+    tom="atencao"
+    icone="percent"
+    sufixo="%"
+    [casasDecimais]="1"
+    [valor]="kpis?.percentualReprovacao ?? null"
+    [carregando]="carregando"
+    [altaEhRuim]="true"
+    [variacaoPercentual]="variacaoPercentualReprovacao"
+    descricaoComparativo="p.p. vs. anterior"
+    [serie]="seriePercentual">
+  </cf-kpi>
+</div>

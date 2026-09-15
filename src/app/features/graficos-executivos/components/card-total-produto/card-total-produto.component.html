@@ -1,0 +1,46 @@
+<div class="volume" [attr.aria-label]="descricaoAcessivel">
+  <div class="volume__kpi">
+    <span class="volume__kpi-valor">{{ totalGeral | number: '1.0-0' : 'pt-BR' }}</span>
+    <span class="volume__kpi-sufixo">peças</span>
+    <span
+      class="volume__kpi-variacao"
+      *ngIf="variacaoGeral !== null"
+      [class.volume__kpi-variacao--queda]="variacaoGeral < 0">
+      <mat-icon aria-hidden="true">{{ variacaoGeral >= 0 ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+      {{ variacaoGeral >= 0 ? '+' : '' }}{{ variacaoGeral | number: '1.1-1' : 'pt-BR' }}%
+      <span class="volume__kpi-legenda">vs. período anterior</span>
+    </span>
+  </div>
+
+  <ul class="volume__lista">
+    <li *ngFor="let linha of linhas">
+      <button
+        type="button"
+        class="volume__item"
+        [class.volume__item--selecionado]="selecionado === linha.chave"
+        [class.volume__item--recuado]="selecionado && selecionado !== linha.chave"
+        [attr.aria-pressed]="selecionado === linha.chave"
+        (click)="produtoAlternado.emit(linha.chave)">
+      <div class="volume__cabecalho">
+        <span class="volume__produto">{{ linha.rotulo }}</span>
+        <span class="volume__percentual" [class.volume__percentual--alerta]="linha.percentualReprovacao >= 30">
+          {{ linha.percentualReprovacao | number: '1.1-1' : 'pt-BR' }}% reprovação
+        </span>
+      </div>
+      <div class="volume__barra" role="presentation">
+        <span
+          class="volume__preenchimento"
+          [style.width.%]="linha.percentualDoVolume"
+          [style.background]="corBarra">
+        </span>
+      </div>
+      <div class="volume__rodape">
+        <span>{{ linha.total }} peças</span>
+      </div>
+      <span class="apenas-leitor-tela">
+        {{ selecionado === linha.chave ? 'Remover recorte por' : 'Recortar a página por' }} {{ linha.rotulo }}
+      </span>
+      </button>
+    </li>
+  </ul>
+</div>

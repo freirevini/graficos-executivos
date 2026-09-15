@@ -1,0 +1,137 @@
+.canais {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+.canais__kpi {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.canais__kpi-valor { font-size: 1.75rem; font-weight: 700; color: var(--cf-texto); }
+
+.canais__kpi-variacao {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--cf-aprovado);
+}
+
+.canais__kpi-variacao mat-icon {
+  align-self: center;
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
+}
+
+.canais__kpi-variacao--queda { color: var(--cf-reprovado); }
+
+// Mesma fonte/tamanho do valor de variação, só sem negrito — fica colado nele
+// em vez de empurrado pra ponta direita do card.
+.canais__kpi-legenda {
+  font-weight: 400;
+  color: var(--cf-texto-secundario);
+}
+
+// --- Barra segmentada em traços, proporcional ao volume de cada origem -----
+.canais__tickbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 28px;
+}
+
+.canais__traco {
+  flex: 1 1 0;
+  height: 100%;
+  min-width: 2px;
+  border-radius: 2px;
+}
+
+// --- Tabela ------------------------------------------------------------------
+.canais__tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.canais__tabela th[scope='col'] {
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--cf-texto-secundario);
+  padding: 0 0 8px;
+}
+
+.canais__col-numerica { text-align: center; white-space: nowrap; }
+
+.canais__tabela th[scope='row'] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 0;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: var(--cf-texto);
+  text-align: left;
+  border-top: 1px solid var(--cf-borda-suave);
+}
+
+.canais__tabela td {
+  padding: 9px 0;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--cf-texto);
+  text-align: center;
+  border-top: 1px solid var(--cf-borda-suave);
+  vertical-align: middle;
+}
+
+.canais__ponto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+// --- Coluna Δ: variação da taxa de reprovação vs. período anterior ---------
+// Cor INVERTIDA em relação ao convencional "alta = verde": aqui alta na taxa
+// de reprovação é ruim (vermelho) e queda é boa (verde) — mesma semântica de
+// `altaEhRuim` usada em cf-kpi para a faixa de KPIs do topo da página.
+.canais__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.canais__delta mat-icon { font-size: 14px; width: 14px; height: 14px; }
+
+.canais__delta--queda { color: var(--cf-aprovado); }
+.canais__delta--alta { color: var(--cf-reprovado); }
+.canais__delta--igual { color: var(--cf-texto-secundario); }
+.canais__delta--indisponivel { color: var(--cf-texto-secundario-alt); font-weight: 400; }
+
+// --- Linha clicável: recorta a página pela origem -----------------------------
+.canais__linha {
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.canais__linha:hover { background: var(--cf-fundo); }
+.canais__linha:focus-visible { outline: 2px solid var(--cf-azul-acao); outline-offset: -2px; }
+
+.canais__linha--selecionada {
+  background: var(--cf-info-fundo);
+
+  th[scope='row'], td { font-weight: 700; }
+}
+
+// As demais recuam quando há um recorte, para a selecionada ficar evidente.
+.canais__linha--recuada { opacity: 0.45; }

@@ -1,0 +1,23 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.pagina__trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1199px) {
+  .pagina__trio { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .pagina { padding: 16px 12px; gap: 12px; }
+  .pagina__trio { grid-template-columns: 1fr; }
+}

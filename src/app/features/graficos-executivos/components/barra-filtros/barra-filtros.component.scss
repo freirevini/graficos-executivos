@@ -1,0 +1,97 @@
+.filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 20px 2px;
+  background: var(--cf-superficie);
+  border: 1px solid var(--cf-borda-suave);
+  border-radius: var(--cf-raio);
+  box-shadow: var(--cf-sombra);
+}
+
+.filtros__campos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.filtros__campo { flex: 1 1 190px; min-width: 170px; }
+// Largura suficiente para as duas datas completas — abaixo disso o ano é
+// cortado no meio ("14/09/202…").
+.filtros__campo--periodo { flex: 0 1 290px; min-width: 280px; }
+
+// Campo com seleção ganha um realce discreto — a barra passa a dizer, de
+// relance, ONDE há filtro aplicado, em vez de só quantos existem.
+.filtros__campo--ativo {
+  ::ng-deep .mat-mdc-text-field-wrapper { background: var(--cf-info-fundo); }
+
+  ::ng-deep .mdc-notched-outline__leading,
+  ::ng-deep .mdc-notched-outline__notch,
+  ::ng-deep .mdc-notched-outline__trailing {
+    border-color: var(--cf-azul-acao);
+  }
+}
+
+.filtros__limpar {
+  margin-left: auto;
+  align-self: center;
+  white-space: nowrap;
+  color: var(--cf-azul-acao);
+}
+
+// --- Chips dos filtros aplicados -------------------------------------------
+// Um por filtro, removível: é o "desfazer" item a item que a barra não tinha.
+.filtros__ativos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 2px 0 12px;
+}
+
+.filtros__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px 6px 3px 10px;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--cf-texto);
+  background: var(--cf-fundo);
+  border: 1px solid var(--cf-borda);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.filtros__chip:hover {
+  background: var(--cf-info-fundo);
+  border-color: var(--cf-azul-acao);
+}
+
+.filtros__chip mat-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--cf-texto-secundario);
+}
+
+.filtros__chip:hover mat-icon { color: var(--cf-azul-acao); }
+
+// O recorte vem do clique no gráfico, não da barra — cor de ação o distingue
+// dos filtros que o próprio usuário escolheu aqui.
+.filtros__chip--recorte {
+  color: var(--cf-info);
+  background: var(--cf-info-fundo);
+  border-color: var(--cf-info);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 767px) {
+  .filtros { padding: 12px 12px 2px; }
+  .filtros__campo,
+  .filtros__campo--periodo { flex: 1 1 100%; }
+  .filtros__limpar { margin-left: 0; align-self: flex-start; }
+}

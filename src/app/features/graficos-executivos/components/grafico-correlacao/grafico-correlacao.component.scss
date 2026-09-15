@@ -1,0 +1,29 @@
+// O host é filho direto de `.cf-card__conteudo`, que é flex column: sem
+// `flex: 1` ele fica do tamanho do próprio conteúdo (o `min-height` da tela) e
+// sobra espaço morto no fim do card. `min-height: 0` deixa o canvas encolher
+// junto quando o card é menor.
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+// `flex: 1` em vez de `height: 100%`: a altura do host vem do próprio layout
+// flex do card, e porcentagem contra altura não-definida resolve como `auto`.
+.correlacao {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.correlacao__tela {
+  position: relative;
+  flex: 1;
+  min-height: 300px;
+}
+
+@media (max-width: 599px) {
+  .correlacao__tela { min-height: 260px; }
+}

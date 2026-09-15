@@ -1,0 +1,48 @@
+<section class="cf-card">
+  <header class="cf-card__cabecalho" [class.cf-card__cabecalho--centralizado]="centralizarTitulo" *ngIf="titulo">
+    <div class="cf-card__textos">
+      <h2 class="cf-card__titulo" *ngIf="nivelTitulo === 2">{{ titulo }}</h2>
+      <h3 class="cf-card__titulo" *ngIf="nivelTitulo === 3">{{ titulo }}</h3>
+      <p class="cf-card__descricao" *ngIf="descricao">{{ descricao }}</p>
+    </div>
+    <div class="cf-card__acoes">
+      <ng-content select="[acoes]"></ng-content>
+    </div>
+  </header>
+
+  <div class="cf-card__corpo" [style.min-height]="alturaCorpo">
+    <ng-container *ngIf="carregando">
+      <div class="cf-card__skeleton" role="status" aria-live="polite">
+        <span class="apenas-leitor-tela">Carregando {{ titulo || 'dados' }}…</span>
+        <cf-skeleton altura="12px" largura="40%"></cf-skeleton>
+        <cf-skeleton [altura]="alturaCorpo"></cf-skeleton>
+      </div>
+    </ng-container>
+
+    <cf-estado
+      *ngIf="!carregando && erro"
+      tipo="erro"
+      titulo="Não foi possível carregar"
+      [descricao]="erro.mensagem"
+      [permiteNovaTentativa]="erro.permiteNovaTentativa"
+      (tentarNovamente)="tentarNovamente.emit()">
+    </cf-estado>
+
+    <cf-estado
+      *ngIf="!carregando && !erro && vazio"
+      tipo="vazio"
+      titulo="Sem dados"
+      [descricao]="mensagemVazio">
+    </cf-estado>
+
+    <div
+      class="cf-card__conteudo"
+      [class.cf-card__conteudo--atualizando]="atualizando"
+      *ngIf="!carregando && !erro && !vazio">
+      <div class="cf-card__progresso" *ngIf="atualizando" role="status" aria-live="polite">
+        <span class="apenas-leitor-tela">Atualizando {{ titulo || 'dados' }}…</span>
+      </div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</section>

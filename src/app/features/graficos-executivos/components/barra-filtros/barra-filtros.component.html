@@ -1,0 +1,84 @@
+<section class="filtros" [formGroup]="formulario" aria-label="Filtros dos indicadores">
+  <div class="filtros__campos">
+    <mat-form-field appearance="outline" class="filtros__campo filtros__campo--periodo" formGroupName="periodo">
+      <mat-label>Período</mat-label>
+      <mat-date-range-input [rangePicker]="seletorPeriodo">
+        <input matStartDate formControlName="de" placeholder="Início" aria-label="Data inicial">
+        <input matEndDate formControlName="ate" placeholder="Fim" aria-label="Data final">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="seletorPeriodo"></mat-datepicker-toggle>
+      <!-- Cabeçalho próprio: o clique no rótulo desce um degrau por vez
+           (dias -> meses -> anos), em vez de pular direto para a grade de anos. -->
+      <mat-date-range-picker
+        #seletorPeriodo
+        [calendarHeaderComponent]="cabecalhoCalendario"
+        (monthSelected)="selecionarMesInteiro($event, seletorPeriodo)">
+      </mat-date-range-picker>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      class="filtros__campo"
+      [class.filtros__campo--ativo]="temSelecao('produtos')">
+      <mat-label>Produto</mat-label>
+      <mat-select formControlName="produtos" multiple [disabled]="!opcoes">
+        <!-- Resumo no lugar da lista truncada que o mat-select imprime. -->
+        <mat-select-trigger>{{ resumoSelecao('produtos') }}</mat-select-trigger>
+        <mat-option *ngFor="let opcao of opcoes?.produtos" [value]="opcao.chave">
+          {{ opcao.rotulo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      class="filtros__campo"
+      [class.filtros__campo--ativo]="temSelecao('origens')">
+      <mat-label>Origem</mat-label>
+      <mat-select formControlName="origens" multiple [disabled]="!opcoes">
+        <mat-select-trigger>{{ resumoSelecao('origens') }}</mat-select-trigger>
+        <mat-option *ngFor="let opcao of opcoes?.origens" [value]="opcao.chave">
+          {{ opcao.rotulo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      class="filtros__campo"
+      [class.filtros__campo--ativo]="temSelecao('riscos')">
+      <mat-label>Risco atrelado</mat-label>
+      <mat-select formControlName="riscos" multiple [disabled]="!opcoes">
+        <mat-select-trigger>{{ resumoSelecao('riscos') }}</mat-select-trigger>
+        <mat-option *ngFor="let opcao of opcoes?.riscos" [value]="opcao.chave">
+          {{ opcao.rotulo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Só aparece quando há o que limpar: botão desabilitado permanente é
+         ruído, não affordance. -->
+    <button
+      mat-button
+      type="button"
+      class="filtros__limpar"
+      *ngIf="podeLimpar"
+      (click)="limparFiltros.emit()">
+      <mat-icon aria-hidden="true">filter_alt_off</mat-icon>
+      Limpar filtros
+    </button>
+  </div>
+
+  <div class="filtros__ativos" *ngIf="chipsAtivos.length">
+    <button
+      type="button"
+      class="filtros__chip"
+      *ngFor="let chip of chipsAtivos"
+      [class.filtros__chip--recorte]="chip.tipo === 'recorte'"
+      (click)="removerChip(chip)">
+      {{ chip.rotulo }}
+      <mat-icon aria-hidden="true">close</mat-icon>
+      <span class="apenas-leitor-tela">Remover filtro {{ chip.rotulo }}</span>
+    </button>
+  </div>
+</section>

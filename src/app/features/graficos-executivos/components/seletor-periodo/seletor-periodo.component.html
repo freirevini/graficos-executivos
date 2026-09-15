@@ -1,0 +1,11 @@
+<div class="seletor" role="group" aria-label="Período exibido no gráfico">
+  <button
+    *ngFor="let preset of presets"
+    type="button"
+    class="seletor__opcao"
+    [class.seletor__opcao--ativo]="ativo === preset.valor"
+    [attr.aria-pressed]="ativo === preset.valor"
+    (click)="escolher(preset)">
+    {{ preset.rotulo }}
+  </button>
+</div>

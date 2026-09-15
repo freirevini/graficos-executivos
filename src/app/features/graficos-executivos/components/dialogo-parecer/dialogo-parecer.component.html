@@ -1,0 +1,40 @@
+<h2 mat-dialog-title class="parecer__titulo">
+  Peça {{ linha.id }}
+  <span
+    class="selo"
+    [class.selo--aprovada]="linha.resultado === 'APROVADA'"
+    [class.selo--reprovada]="linha.resultado === 'REPROVADA'">
+    {{ linha.resultado === 'APROVADA' ? 'Aprovada' : 'Reprovada' }}
+  </span>
+</h2>
+
+<mat-dialog-content class="parecer">
+  <dl class="parecer__meta">
+    <div>
+      <dt>Produto</dt>
+      <dd>{{ linha.produto.rotulo }}</dd>
+    </div>
+    <div>
+      <dt>Data da avaliação</dt>
+      <dd>{{ linha.dataAvaliacao | date: "dd/MM/yyyy 'às' HH:mm" : undefined : 'pt-BR' }}</dd>
+    </div>
+    <div>
+      <dt>Risco atrelado</dt>
+      <dd>{{ linha.riscoAtrelado.rotulo }}</dd>
+    </div>
+  </dl>
+
+  <section class="parecer__secao">
+    <h3>Parecer da IA</h3>
+    <div class="parecer__conteudo" [innerHTML]="parecerHtml"></div>
+  </section>
+
+  <section class="parecer__secao" *ngIf="temRecomendacoes">
+    <h3>Recomendações para ajustes</h3>
+    <div class="parecer__conteudo" [innerHTML]="recomendacoesHtml"></div>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

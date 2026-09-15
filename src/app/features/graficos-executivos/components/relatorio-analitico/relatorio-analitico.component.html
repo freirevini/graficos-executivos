@@ -1,0 +1,79 @@
+<div class="analitico">
+  <div class="analitico__rolagem">
+    <table
+      mat-table
+      matSort
+      class="analitico__tabela"
+      [dataSource]="pagina?.conteudo ?? []"
+      [matSortActive]="parametros?.ordenarPor ?? 'dataAvaliacao'"
+      [matSortDirection]="parametros?.direcao ?? 'desc'"
+      matSortDisableClear
+      (matSortChange)="aoOrdenar($event)">
+
+      <ng-container matColumnDef="produto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Produto</th>
+        <td mat-cell *matCellDef="let linha">{{ linha.produto.rotulo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataAvaliacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data avaliação</th>
+        <td mat-cell *matCellDef="let linha" class="coluna--numerica">
+          {{ linha.dataAvaliacao | date: 'dd/MM/yyyy' : undefined : 'pt-BR' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="resultado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Resultado</th>
+        <td mat-cell *matCellDef="let linha">
+          <span
+            class="selo"
+            [class.selo--aprovada]="linha.resultado === 'APROVADA'"
+            [class.selo--reprovada]="linha.resultado === 'REPROVADA'">
+            {{ linha.resultado === 'APROVADA' ? 'Aprovada' : 'Reprovada' }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="riscoAtrelado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Risco atrelado</th>
+        <td mat-cell *matCellDef="let linha">{{ linha.riscoAtrelado.rotulo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="parecerIa">
+        <th mat-header-cell *matHeaderCellDef>Parecer IA</th>
+        <td mat-cell *matCellDef="let linha" class="coluna--texto">
+          {{ resumo(linha.parecerIa) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="recomendacoesAjuste">
+        <th mat-header-cell *matHeaderCellDef>Recomendações para ajustes</th>
+        <td mat-cell *matCellDef="let linha" class="coluna--texto">
+          {{ resumo(linha.recomendacoesAjuste) }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+      <tr
+        mat-row
+        *matRowDef="let linha; columns: colunas"
+        class="analitico__linha"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'Abrir parecer completo da peça ' + linha.id"
+        (click)="abrirDetalhe(linha)"
+        (keydown.enter)="abrirDetalhe(linha)"
+        (keydown.space)="$event.preventDefault(); abrirDetalhe(linha)">
+      </tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    *ngIf="pagina"
+    [length]="pagina.totalElementos"
+    [pageIndex]="pagina.pagina"
+    [pageSize]="pagina.tamanho"
+    [pageSizeOptions]="tamanhosPagina"
+    (page)="aoPaginar($event)">
+  </mat-paginator>
+</div>

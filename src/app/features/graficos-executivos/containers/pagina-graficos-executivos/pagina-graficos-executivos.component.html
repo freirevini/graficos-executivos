@@ -1,0 +1,117 @@
+<main class="pagina" *ngIf="visao$ | async as visao">
+  <cf-cabecalho-pagina [atualizadoEm]="visao.dashboard.dados?.atualizadoEm ?? null">
+  </cf-cabecalho-pagina>
+
+  <cf-estado
+    *ngIf="erroGlobal(visao) as erro"
+    tipo="erro"
+    titulo="Não foi possível carregar os filtros"
+    [descricao]="erro.mensagem"
+    [permiteNovaTentativa]="erro.permiteNovaTentativa"
+    (tentarNovamente)="recarregar()">
+  </cf-estado>
+
+  <gx-barra-filtros
+    [filtros]="visao.filtros"
+    [opcoes]="visao.opcoes.dados"
+    [carregando]="visao.opcoes.carregando"
+    (filtrosAlterados)="aplicarFiltros($event)"
+    (limparFiltros)="limparFiltros()">
+  </gx-barra-filtros>
+
+  <gx-faixa-kpis
+    [kpis]="visao.dashboard.dados?.kpis ?? null"
+    [serie]="visao.dashboard.dados?.serieTemporal ?? []"
+    [carregando]="visao.dashboard.carregando">
+  </gx-faixa-kpis>
+
+  <cf-card
+    titulo="Volume Avaliado × Taxa de Reprovação"
+    [centralizarTitulo]="true"
+    [nivelTitulo]="2"
+    alturaCorpo="380px"
+    [carregando]="visao.dashboard.carregando"
+    [atualizando]="visao.dashboard.atualizando"
+    [erro]="visao.dashboard.erro"
+    [vazio]="visao.semDados"
+    (tentarNovamente)="recarregar()">
+    <gx-seletor-periodo
+      acoes
+      [filtros]="visao.filtros"
+      (periodoEscolhido)="escolherPeriodo($event)">
+    </gx-seletor-periodo>
+
+    <gx-grafico-correlacao
+      [serie]="visao.dashboard.dados?.serieTemporal ?? []"
+      [periodoSelecionado]="visao.filtros.periodo"
+      [granularidade]="visao.filtros.granularidade"
+      (periodoAlternado)="alternarPeriodo($event)">
+    </gx-grafico-correlacao>
+  </cf-card>
+
+  <div class="pagina__trio">
+    <cf-card
+      titulo="Reprovação por risco atrelado"
+    [centralizarTitulo]="true"
+      [carregando]="visao.dashboard.carregando"
+      [atualizando]="visao.dashboard.atualizando"
+      [erro]="visao.dashboard.erro"
+      [vazio]="visao.semDados"
+      (tentarNovamente)="recarregar()">
+      <gx-card-reprovacao-risco
+        [itens]="visao.dashboard.dados?.reprovacaoPorRisco ?? []"
+        [reprovadasPeriodoAnterior]="visao.dashboard.dados?.kpis?.periodoAnterior?.pecasReprovadas ?? null"
+        [selecionado]="recorteUnico(visao.filtros.riscos)"
+        (riscoAlternado)="alternarDimensao('riscos', $event)">
+      </gx-card-reprovacao-risco>
+    </cf-card>
+
+    <cf-card
+      titulo="Origem × resultado"
+    [centralizarTitulo]="true"
+      [carregando]="visao.dashboard.carregando"
+      [atualizando]="visao.dashboard.atualizando"
+      [erro]="visao.dashboard.erro"
+      [vazio]="visao.semDados"
+      (tentarNovamente)="recarregar()">
+      <gx-card-origem-resultado
+        [itens]="visao.dashboard.dados?.origemPorResultado ?? []"
+        [selecionada]="recorteUnico(visao.filtros.origens)"
+        (origemAlternada)="alternarDimensao('origens', $event)">
+      </gx-card-origem-resultado>
+    </cf-card>
+
+    <cf-card
+      titulo="Reprovação por produto"
+    [centralizarTitulo]="true"
+      [carregando]="visao.dashboard.carregando"
+      [atualizando]="visao.dashboard.atualizando"
+      [erro]="visao.dashboard.erro"
+      [vazio]="visao.semDados"
+      (tentarNovamente)="recarregar()">
+      <gx-card-total-produto
+        [itens]="visao.dashboard.dados?.totalPorProduto ?? []"
+        [totalPeriodoAnterior]="visao.dashboard.dados?.kpis?.periodoAnterior?.totalPecas ?? null"
+        [selecionado]="recorteUnico(visao.filtros.produtos)"
+        (produtoAlternado)="alternarDimensao('produtos', $event)">
+      </gx-card-total-produto>
+    </cf-card>
+  </div>
+
+  <cf-card
+    titulo="Relatório analítico"
+    [nivelTitulo]="2"
+    alturaCorpo="320px"
+    [carregando]="visao.analitico.carregando"
+    [atualizando]="visao.analitico.atualizando"
+    [erro]="visao.analitico.erro"
+    [vazio]="(visao.analitico.dados?.totalElementos ?? 0) === 0"
+    mensagemVazio="Nenhuma peça avaliada no recorte selecionado."
+    (tentarNovamente)="recarregar()">
+    <gx-relatorio-analitico
+      [pagina]="visao.analitico.dados"
+      [parametros]="visao.parametros"
+      (parametrosAlterados)="mudarPagina($event)">
+    </gx-relatorio-analitico>
+  </cf-card>
+</main>

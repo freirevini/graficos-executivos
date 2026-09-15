@@ -1,0 +1,36 @@
+.analitico { display: flex; flex-direction: column; }
+
+.analitico__rolagem {
+  // Tabela larga rola dentro do próprio container — o body nunca rola na horizontal.
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.analitico__tabela { width: 100%; min-width: 900px; }
+
+.analitico__linha { cursor: pointer; }
+.analitico__linha:hover { background: var(--cf-fundo); }
+.analitico__linha:focus-visible { outline-offset: -3px; }
+
+.coluna--numerica { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.coluna--texto {
+  max-width: 320px;
+  color: var(--cf-texto-secundario);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.selo {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.selo--aprovada { color: var(--cf-aprovado); background: var(--cf-aprovado-fundo); }
+.selo--reprovada { color: var(--cf-reprovado); background: var(--cf-reprovado-fundo); }

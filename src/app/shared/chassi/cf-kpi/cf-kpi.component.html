@@ -1,0 +1,37 @@
+<div class="cf-kpi" [ngClass]="'cf-kpi--' + tom">
+  <div class="cf-kpi__topo">
+    <div class="cf-kpi__textos">
+      <p class="cf-kpi__rotulo">{{ rotulo }}</p>
+
+      <ng-container *ngIf="carregando; else valorPronto">
+        <cf-skeleton altura="34px" largura="70%"></cf-skeleton>
+      </ng-container>
+
+      <ng-template #valorPronto>
+        <p class="cf-kpi__valor">
+          {{ valor | number: '1.' + casasDecimais + '-' + casasDecimais : 'pt-BR' }}<span
+            class="cf-kpi__sufixo" *ngIf="sufixo">{{ sufixo }}</span>
+        </p>
+
+        <p class="cf-kpi__variacao" [ngClass]="classeVariacao" *ngIf="variacaoPercentual !== null">
+          <mat-icon class="cf-kpi__seta" aria-hidden="true">
+            {{ variacaoEhNeutra ? 'trending_flat' : (variacaoEhPositiva ? 'trending_up' : 'trending_down') }}
+          </mat-icon>
+          <span class="cf-kpi__delta" aria-hidden="true">
+            {{ variacaoEhPositiva ? '+' : '' }}{{ variacaoPercentual | number: '1.1-1' : 'pt-BR' }}%
+          </span>
+          <span class="cf-kpi__comparativo" aria-hidden="true">{{ descricaoComparativo }}</span>
+          <span class="apenas-leitor-tela">{{ leituraVariacao }}</span>
+        </p>
+      </ng-template>
+    </div>
+
+    <span class="cf-kpi__badge" aria-hidden="true">
+      <mat-icon>{{ icone }}</mat-icon>
+    </span>
+  </div>
+
+  <div class="cf-kpi__sparkline" *ngIf="temSparkline && !carregando" aria-hidden="true">
+    <canvas baseChart type="line" [data]="dadosSparkline" [options]="opcoesSparkline"></canvas>
+  </div>
+</div>
