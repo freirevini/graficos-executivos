@@ -1,0 +1,119 @@
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.cabecalho__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 1.25rem;
+  color: var(--cf-azul-acao);
+  background: var(--cf-info-fundo);
+  border-radius: 50%;
+}
+
+.cabecalho__nome {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modelo {
+  padding: 16px;
+  background: var(--cf-fundo);
+  border: 1px solid var(--cf-borda-suave);
+  border-radius: var(--cf-raio-pequeno);
+}
+
+.modelo__cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.modelo__nome {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--cf-texto);
+}
+
+.modelo__percentual {
+  font-weight: 700;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--cf-azul-acao);
+  white-space: nowrap;
+}
+
+.modelo__papel {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  color: var(--cf-texto-secundario);
+}
+
+.modelo__versao {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cf-texto-secundario);
+  display: flex;
+  gap: 6px;
+}
+
+.modelo__benchmark {
+  display: flex;
+  gap: 20px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--cf-borda-suave);
+}
+
+.metrica {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metrica__valor {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--cf-texto);
+}
+
+.metrica__rotulo {
+  font-size: 0.6875rem;
+  color: var(--cf-texto-secundario);
+}
+
+.modelo__sem-benchmark {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--cf-texto-secundario);
+  border-top: 1px dashed var(--cf-borda-suave);
+}
+
+.fonte {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  color: var(--cf-azul-acao);
+  text-decoration: none;
+}
+
+.fonte:hover,
+.fonte:focus-visible {
+  text-decoration: underline;
+}

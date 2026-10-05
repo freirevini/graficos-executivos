@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    :root {
+      --cf-azul-acao: #1976d2;
+      --cf-azul-hover: #1565c0;
+      --cf-azul-escuro: #0d47a1;
+      --cf-fundo: #fafafa;
+      --cf-superficie: #ffffff;
+      --cf-texto: #212121;
+      --cf-texto-alt: #333333;
+      --cf-texto-secundario: #666666;
+      --cf-texto-secundario-alt: #757575;
+      --cf-borda-suave: #eceff1;
+      --cf-aprovado: #2e7d32;
+      --cf-info-fundo: #e3f2fd;
+      --cf-inconclusivo-forte: #8a5300;
+      --cf-kpi-neutro: #1976d2;
+      --cf-kpi-neutro-fundo: rgba(25, 118, 210, 0.12);
+      --cf-kpi-aprovado: #002bab;
+      --cf-kpi-aprovado-fundo: rgba(0, 43, 171, 0.12);
+      --cf-kpi-atencao: #c9a13c;
+      --cf-kpi-atencao-fundo: rgba(201, 161, 60, 0.14);
+      --cf-reprovado: #c62828;
+      --cf-raio: 12px;
+      --cf-raio-pequeno: 8px;
+      --cf-sombra: 0 1px 2px rgba(33, 33, 33, 0.06), 0 2px 8px rgba(33, 33, 33, 0.06);
+    }
+    body { margin: 0; font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; background: var(--cf-fundo); color: var(--cf-texto); }
+    a { text-decoration: none; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; min-height: 1100px; background: var(--cf-fundo);">
+
+  <!-- Topo do shell -->
+  <header style="display: flex; align-items: center; gap: 24px; height: 56px; padding: 0 24px; color: #fff; background: linear-gradient(135deg, #2f89c7 0%, #305393 100%); box-shadow: var(--cf-sombra);">
+    <span style="font-size: 1.125rem; font-weight: 700; letter-spacing: 0.02em;">ConforME</span>
+    <nav style="display: flex; gap: 16px; flex: 1;">
+      <a href="#" style="color: #fff; font-size: 0.875rem; font-weight: 500; padding: 4px 0; border-bottom: 2px solid #5ccbe1;">Início</a>
+      <a href="#" style="color: rgba(255,255,255,0.85); font-size: 0.875rem; font-weight: 500; padding: 4px 0; border-bottom: 2px solid transparent;">Gráficos Executivos</a>
+    </nav>
+    <span style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,0.18);">Ambiente local · dados mockados</span>
+  </header>
+
+  <main style="display: flex; flex-direction: column; gap: 16px; max-width: 1440px; margin: 0 auto; padding: 24px; box-sizing: border-box;">
+
+    <!-- Hero -->
+    <section style="position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px 20px; padding: 28px 32px; color: #fff; background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), linear-gradient(135deg, #2f89c7 0%, #305393 100%); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; font-weight: 700;">Boa tarde, Vinicius!</h1>
+        <p style="margin: 6px 0 0; font-size: 0.9375rem; color: #fff;">Bem-vindo ao <strong>ConforME</strong> · <span>terça-feira, 15 de setembro</span></p>
+      </div>
+      <span style="justify-self: end; padding: 4px 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: #fff; background: rgba(255,255,255,0.18); border-radius: 999px; white-space: nowrap;">Compliance</span>
+      <div style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px;">
+        <button style="padding: 8px 20px; font-size: 0.875rem; font-weight: 500; border-radius: var(--cf-raio-pequeno); border: 1px solid transparent; background: #fff; color: {{accent}}; cursor: pointer;">Abrir Gráficos Executivos</button>
+        <button style="padding: 8px 20px; font-size: 0.875rem; font-weight: 500; border-radius: var(--cf-raio-pequeno); border: 1px solid rgba(255,255,255,0.6); background: transparent; color: #fff; cursor: pointer;">Como funciona</button>
+      </div>
+    </section>
+
+    <!-- Faixa de KPIs -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+
+      <!-- KPI 1 -->
+      <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 148px; padding: 18px 20px 0; overflow: hidden; background: var(--cf-superficie); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;">
+          <div>
+            <p style="margin: 0 0 6px; font-size: 0.8125rem; font-weight: 500; color: var(--cf-texto-secundario);">Peças analisadas em 2026</p>
+            <p style="margin: 0; font-size: 2rem; font-weight: 700; line-height: 1.1; color: var(--cf-texto);">331</p>
+          </div>
+          <span style="display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 42px; height: 42px; border-radius: var(--cf-raio-pequeno); color: {{accent}}; background: var(--cf-kpi-neutro-fundo);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M9 12l2 2 4-4M8 17h4"/></svg>
+          </span>
+        </div>
+        <svg style="margin: 12px -20px 0; height: 46px; width: calc(100% + 40px);" viewBox="0 0 300 46" preserveAspectRatio="none">
+          <path d="M0,32 L30,28 L60,20 L90,24 L120,10 L150,18 L180,26 L210,14 L240,20 L270,30 L300,26" fill="none" stroke="{{accent}}" stroke-width="2"/>
+          <path d="M0,32 L30,28 L60,20 L90,24 L120,10 L150,18 L180,26 L210,14 L240,20 L270,30 L300,26 L300,46 L0,46 Z" fill="{{accent}}" opacity="0.12"/>
+        </svg>
+      </div>
+
+      <!-- KPI 2 -->
+      <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 148px; padding: 18px 20px 0; overflow: hidden; background: var(--cf-superficie); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;">
+          <div>
+            <p style="margin: 0 0 6px; font-size: 0.8125rem; font-weight: 500; color: var(--cf-texto-secundario);">Taxa de conformidade</p>
+            <p style="margin: 0; font-size: 2rem; font-weight: 700; line-height: 1.1; color: var(--cf-texto);">70,7<span style="font-size: 1.125rem; font-weight: 600; margin-left: 2px;">%</span></p>
+          </div>
+          <span style="display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 42px; height: 42px; border-radius: var(--cf-raio-pequeno); color: var(--cf-kpi-aprovado); background: var(--cf-kpi-aprovado-fundo);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 1.4 2.8-.3 1.1 2.6 2.6 1.1-.3 2.8L22 12l-1.4 2.4.3 2.8-2.6 1.1-1.1 2.6-2.8-.3L12 22l-2.4-1.4-2.8.3-1.1-2.6-2.6-1.1.3-2.8L2 12l1.4-2.4-.3-2.8 2.6-1.1 1.1-2.6 2.8.3z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+        </div>
+        <svg style="margin: 12px -20px 0; height: 46px; width: calc(100% + 40px);" viewBox="0 0 300 46" preserveAspectRatio="none">
+          <path d="M0,18 L30,26 L60,14 L90,20 L120,30 L150,20 L180,12 L210,22 L240,16 L270,24 L300,18" fill="none" stroke="var(--cf-kpi-aprovado)" stroke-width="2"/>
+          <path d="M0,18 L30,26 L60,14 L90,20 L120,30 L150,20 L180,12 L210,22 L240,16 L270,24 L300,18 L300,46 L0,46 Z" fill="var(--cf-kpi-aprovado)" opacity="0.12"/>
+        </svg>
+      </div>
+
+      <!-- KPI 3 -->
+      <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 148px; padding: 18px 20px 0; overflow: hidden; background: var(--cf-superficie); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;">
+          <div>
+            <p style="margin: 0 0 6px; font-size: 0.8125rem; font-weight: 500; color: var(--cf-texto-secundario);">Tempo médio por peça</p>
+            <p style="margin: 0; font-size: 2rem; font-weight: 700; line-height: 1.1; color: var(--cf-texto);">32<span style="font-size: 1.125rem; font-weight: 600; margin-left: 2px;">s</span></p>
+          </div>
+          <span style="display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 42px; height: 42px; border-radius: var(--cf-raio-pequeno); color: {{accent}}; background: var(--cf-kpi-neutro-fundo);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- KPI 4 -->
+      <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 148px; padding: 18px 20px 0; overflow: hidden; background: var(--cf-superficie); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;">
+          <div>
+            <p style="margin: 0 0 6px; font-size: 0.8125rem; font-weight: 500; color: var(--cf-texto-secundario);">Peças no mês corrente</p>
+            <p style="margin: 0; font-size: 2rem; font-weight: 700; line-height: 1.1; color: var(--cf-texto);">23</p>
+            <p style="display: flex; align-items: center; gap: 4px; margin: 10px 0 0; font-size: 0.75rem; color: var(--cf-reprovado);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l7 7 4-4 7 7M21 17v-6h-6"/></svg>
+              <span style="font-weight: 700;">-47,7%</span>
+              <span style="color: var(--cf-texto-secundario); font-weight: 400;">vs. mês anterior</span>
+            </p>
+          </div>
+          <span style="display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 42px; height: 42px; border-radius: var(--cf-raio-pequeno); color: var(--cf-kpi-atencao); background: var(--cf-kpi-atencao-fundo);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Atalhos + Configuração -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+
+      <section style="display: flex; flex-direction: column; height: 100%; background: var(--cf-superficie); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+        <header style="padding: 16px 20px 8px;">
+          <h3 style="margin: 0; font-size: 1rem; font-weight: 500; color: var(--cf-texto);">Atalhos</h3>
+        </header>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding: 8px 20px 20px;">
+
+          <a href="#" style="display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 14px; text-decoration: none; color: inherit; background: var(--cf-fundo); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio-pequeno); box-sizing: border-box;">
+            <span style="flex-shrink: 0; color: {{accent}};">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M17 6h4v4"/></svg>
+            </span>
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+              <span style="font-size: 0.9375rem; font-weight: 600; color: var(--cf-texto);">Gráficos Executivos</span>
+              <span style="font-size: 0.8125rem; color: var(--cf-texto-secundario);">KPIs, série temporal e relatório analítico completo.</span>
+            </span>
+          </a>
+
+          <a href="#" style="display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 14px; text-decoration: none; color: inherit; background: var(--cf-fundo); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio-pequeno); box-sizing: border-box;">
+            <span style="flex-shrink: 0; color: {{accent}};">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+            </span>
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+              <span style="font-size: 0.9375rem; font-weight: 600; color: var(--cf-texto);">Últimos 30 dias</span>
+              <span style="font-size: 0.8125rem; color: var(--cf-texto-secundario);">Volume avaliado dia a dia no último mês.</span>
+            </span>
+          </a>
+
+          <a href="#" style="display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 14px; text-decoration: none; color: inherit; background: var(--cf-fundo); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio-pequeno); box-sizing: border-box;">
+            <span style="flex-shrink: 0; color: {{accent}};">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-8.5 8.5a3 3 0 01-4.24 0l-2.76-2.76a3 3 0 010-4.24z"/><path d="M5 21l3-3"/></svg>
+            </span>
+            <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+              <span style="font-size: 0.9375rem; font-weight: 600; color: var(--cf-texto);">Risco de Compliance</span>
+              <span style="font-size: 0.8125rem; color: var(--cf-texto-secundario);">Recorte pronto para peças com risco de Compliance e Regulatório.</span>
+            </span>
+          </a>
+
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column; height: 100%; background: var(--cf-superficie); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+        <header style="padding: 16px 20px 8px;">
+          <h3 style="margin: 0; font-size: 1rem; font-weight: 500; color: var(--cf-texto);">Configuração atual</h3>
+        </header>
+        <div style="display: flex; flex-direction: column; gap: 16px; padding: 8px 20px 20px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; font-size: 0.8125rem; font-weight: 500; color: var(--cf-azul-escuro); background: var(--cf-info-fundo); border-radius: 999px;">GPT-4o <strong>38,5%</strong></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; font-size: 0.8125rem; font-weight: 500; color: var(--cf-azul-escuro); background: var(--cf-info-fundo); border-radius: 999px;">Claude Sonnet <strong>45,6%</strong></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; font-size: 0.8125rem; font-weight: 500; color: var(--cf-azul-escuro); background: var(--cf-info-fundo); border-radius: 999px;">Gemini 1.5 Pro <strong>15,9%</strong></span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+            <div>
+              <dt style="display: block; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: var(--cf-texto-secundario);">Tempo médio por peça</dt>
+              <dd style="margin: 2px 0 0; font-size: 0.9375rem; color: var(--cf-texto);">32s</dd>
+            </div>
+            <div>
+              <dt style="display: block; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: var(--cf-texto-secundario);">Versão do prompt</dt>
+              <dd style="margin: 2px 0 0; font-size: 0.9375rem; color: var(--cf-texto);">v3.2.1</dd>
+            </div>
+            <div style="grid-column: 1 / -1;">
+              <dt style="display: block; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: var(--cf-texto-secundario);">Janela de dados</dt>
+              <dd style="margin: 2px 0 0; font-size: 0.9375rem; color: var(--cf-texto);">01/08/2024 – 15/09/2026</dd>
+            </div>
+          </div>
+          <button style="padding: 8px 16px; font-size: 0.875rem; font-weight: 500; border-radius: var(--cf-raio-pequeno); border: 1px solid {{accent}}; background: transparent; color: {{accent}}; cursor: pointer;">Ver todos os detalhes</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sobre + Curiosidade -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+
+      <section style="display: flex; flex-direction: column; height: 100%; background: var(--cf-superficie); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+        <header style="padding: 16px 20px 8px;">
+          <h3 style="margin: 0; font-size: 1rem; font-weight: 500; color: var(--cf-texto);">Sobre o ConforME</h3>
+        </header>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 8px 20px 20px; font-size: 0.875rem; line-height: 1.6; color: var(--cf-texto-alt);">
+          <p style="margin: 0;">O <strong>ConforME</strong> analisa peças de marketing e comunicação antes da veiculação, verificando aderência às normas regulatórias (CMN, SUSEP, FEBRABAN) e às políticas internas de comunicação — reduzindo o tempo entre a criação da peça e a liberação para publicação.</p>
+          <p style="margin: 0;">Cada peça passa por um pipeline de modelos de IA que fazem a triagem do conteúdo, a análise de conformidade propriamente dita e uma revisão cruzada do parecer final. O resultado — aprovação, reprovação e as recomendações de ajuste — fica disponível nos Gráficos Executivos.</p>
+          <p style="margin: 0; font-size: 0.8125rem; color: var(--cf-texto-secundario);">Mantido pela equipe de Compliance e Dados, em parceria com Marketing.</p>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column; height: 100%; background: var(--cf-superficie); border: 1px solid var(--cf-borda-suave); border-radius: var(--cf-raio); box-shadow: var(--cf-sombra); box-sizing: border-box;">
+        <header style="padding: 16px 20px 8px;">
+          <h3 style="margin: 0; font-size: 1rem; font-weight: 500; color: var(--cf-texto);">Você sabia?</h3>
+        </header>
+        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 8px 20px 20px;">
+          <span style="flex-shrink: 0; color: var(--cf-inconclusivo-forte);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a6 6 0 00-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0012 2z"/></svg>
+          </span>
+          <p style="margin: 0; font-size: 0.9375rem; line-height: 1.6; color: var(--cf-texto-alt);">Claude Sonnet responde por 45,6% das análises no período — atuando em "análise de conformidade regulatória".</p>
+        </div>
+      </section>
+    </div>
+
+  </main>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#1976d2","options":["#1976d2","#0d47a1","#2e7d32","#8a5300"]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#1976d2' };
+  }
+}
+</script>
+</body>
+</html>

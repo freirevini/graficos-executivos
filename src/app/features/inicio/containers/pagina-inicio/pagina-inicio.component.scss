@@ -1,0 +1,64 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+// Bento: "Análises" ocupa duas linhas; os demais se encaixam à direita.
+.pagina__kpis {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "analises conformidade tempo"
+    "analises pipeline pipeline";
+  gap: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.pagina__kpis--atualizando { opacity: 0.6; }
+
+.pagina__kpis > * { min-width: 0; }
+
+.kpi--analises { grid-area: analises; }
+.kpi--conformidade { grid-area: conformidade; }
+.kpi--tempo { grid-area: tempo; }
+.kpi--pipeline { grid-area: pipeline; }
+
+ini-como-funciona { scroll-margin-top: 16px; }
+
+.pagina__atividade {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.pagina__rodape {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 24px 24px;
+  font-size: 0.875rem;
+  color: var(--cf-texto-secundario);
+  text-align: center;
+  border-top: 1px solid var(--cf-borda-suave);
+}
+
+@media (max-width: 899px) {
+  .pagina__atividade { grid-template-columns: minmax(0, 1fr); }
+  .pagina__kpis {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "analises analises"
+      "conformidade tempo"
+      "pipeline pipeline";
+  }
+}
+
+@media (max-width: 599px) {
+  .pagina { padding: 16px 12px; gap: 16px; }
+  .pagina__kpis { gap: 12px; }
+  .pagina__rodape { padding: 16px 12px 24px; }
+}

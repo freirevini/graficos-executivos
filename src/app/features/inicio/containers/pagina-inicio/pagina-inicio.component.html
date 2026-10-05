@@ -1,0 +1,97 @@
+<ng-container *ngIf="visao$ | async as visao">
+  <main class="pagina">
+    <ini-hero
+      [saudacao]="visao.saudacao"
+      [primeiroNome]="visao.usuario.primeiroNome">
+    </ini-hero>
+
+    <cf-estado
+      *ngIf="visao.resumo.erro as erro"
+      tipo="erro"
+      titulo="Não foi possível carregar o resumo"
+      [descricao]="erro.mensagem"
+      [permiteNovaTentativa]="erro.permiteNovaTentativa"
+      (tentarNovamente)="recarregar()">
+    </cf-estado>
+
+    <section
+      *ngIf="!visao.resumo.erro"
+      class="pagina__kpis"
+      [class.pagina__kpis--atualizando]="visao.resumo.atualizando"
+      aria-label="Indicadores">
+      <ini-tile-kpi
+        class="kpi kpi--analises"
+        [rotulo]="'Análises em ' + (visao.resumo.dados?.ano ?? '')"
+        icone="fact_check"
+        tom="neutro"
+        [carregando]="visao.resumo.carregando"
+        [valor]="visao.kpis?.analises?.valor ?? null"
+        [serie]="visao.kpis?.analises?.serie ?? []"
+        [variacao]="visao.kpis?.analises?.variacao ?? null"
+        [comparativo]="visao.kpis?.analises?.comparativo ?? ''"
+        pista="Ver mês a mês"
+        (acionado)="abrirGraficoAnalises(visao.resumo.dados)">
+      </ini-tile-kpi>
+
+      <ini-tile-kpi
+        class="kpi kpi--conformidade"
+        rotulo="Taxa de conformidade"
+        icone="verified"
+        tom="aprovado"
+        sufixo="%"
+        [casas]="1"
+        [carregando]="visao.resumo.carregando"
+        [valor]="visao.kpis?.conformidade?.valor ?? null"
+        [serie]="visao.kpis?.conformidade?.serie ?? []"
+        [variacao]="visao.kpis?.conformidade?.variacao ?? null"
+        [comparativo]="visao.kpis?.conformidade?.comparativo ?? ''">
+      </ini-tile-kpi>
+
+      <ini-tile-kpi
+        class="kpi kpi--tempo"
+        rotulo="Tempo médio por peça"
+        icone="schedule"
+        tom="atencao"
+        sufixo=" s"
+        [carregando]="visao.resumo.carregando"
+        [valor]="visao.kpis?.tempoMedio?.valor ?? null"
+        [serie]="visao.kpis?.tempoMedio?.serie ?? []"
+        [variacao]="visao.kpis?.tempoMedio?.variacao ?? null"
+        [altaEhRuim]="true"
+        [comparativo]="visao.kpis?.tempoMedio?.comparativo ?? ''"
+        pista="Ver mês a mês"
+        (acionado)="abrirGraficoTempoMedio(visao.resumo.dados)">
+      </ini-tile-kpi>
+
+      <ini-tile-kpi
+        class="kpi kpi--pipeline"
+        rotulo="Pipeline de IA"
+        icone="hub"
+        logo="assets/logos/gemini.png"
+        tom="neutro"
+        sufixo=" agentes"
+        [carregando]="visao.resumo.carregando"
+        [valor]="visao.pipeline?.agentes ?? null"
+        [detalhe]="visao.pipeline?.detalhe ?? ''"
+        pista="Ver detalhes"
+        (acionado)="abrirPipeline(visao.resumo.dados?.configuracao)">
+      </ini-tile-kpi>
+    </section>
+
+    <ini-como-funciona [modelos]="visao.resumo.dados?.configuracao?.modelos ?? []">
+      <ini-cartao-sobre></ini-cartao-sobre>
+    </ini-como-funciona>
+
+    <div class="pagina__atividade">
+      <ini-ultimas-analises [recurso]="visao.ultimas" (tentarNovamente)="recarregar()"></ini-ultimas-analises>
+
+      <cf-card titulo="Atalhos rápidos" [nivelTitulo]="2" alturaCorpo="auto">
+        <ini-painel-atalhos [atalhos]="atalhos"></ini-painel-atalhos>
+      </cf-card>
+    </div>
+  </main>
+
+  <footer class="pagina__rodape">
+    <span>ConforME - Riscos Não Financeiros - Banco BV</span>
+  </footer>
+</ng-container>

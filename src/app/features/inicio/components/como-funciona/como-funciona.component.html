@@ -1,0 +1,35 @@
+<section id="como-funciona" class="como" aria-labelledby="como-funciona-titulo">
+  <h2 id="como-funciona-titulo" class="como__titulo" tabindex="-1">Como funciona</h2>
+
+  <ol class="como__etapas">
+    <li class="como__etapa" *ngFor="let etapa of etapas; let i = index">
+      <span class="como__numero" aria-hidden="true">{{ i + 1 }}</span>
+      <div>
+        <h3 class="como__etapa-titulo">{{ etapa.titulo }}</h3>
+        <p class="como__etapa-texto">{{ etapa.descricao }}</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="como__grupo">
+    <span class="como__grupo-rotulo" id="como-referencias">Referências normativas</span>
+    <ul class="como__chips" aria-labelledby="como-referencias">
+      <li *ngFor="let norma of referencias">{{ norma }}</li>
+    </ul>
+  </div>
+
+  <div class="como__grupo" *ngIf="modelos.length">
+    <span class="como__grupo-rotulo" id="como-modelos">Modelos em operação</span>
+    <ul class="como__chips como__chips--modelos" aria-labelledby="como-modelos">
+      <li *ngFor="let modelo of modelos">
+        {{ modelo.rotulo }}
+        <strong>{{ modelo.participacaoPercentual | number: '1.0-1' : 'pt-BR' }}%</strong>
+      </li>
+    </ul>
+  </div>
+
+  <details id="sobre-conforme" class="como__saiba">
+    <summary>Saiba mais sobre o ConforME</summary>
+    <div class="como__saiba-corpo"><ng-content></ng-content></div>
+  </details>
+</section>

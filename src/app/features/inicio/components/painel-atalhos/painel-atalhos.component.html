@@ -1,0 +1,14 @@
+<ul class="atalhos">
+  <li *ngFor="let atalho of atalhos">
+    <a
+      class="atalhos__item"
+      [routerLink]="atalho.rota"
+      [queryParams]="atalho.queryParams ?? null">
+      <mat-icon class="atalhos__icone" aria-hidden="true">{{ atalho.icone }}</mat-icon>
+      <span class="atalhos__textos">
+        <span class="atalhos__rotulo">{{ atalho.rotulo }}</span>
+        <span class="atalhos__descricao">{{ atalho.descricao }}</span>
+      </span>
+    </a>
+  </li>
+</ul>

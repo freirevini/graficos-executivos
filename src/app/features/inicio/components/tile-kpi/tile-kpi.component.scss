@@ -1,0 +1,101 @@
+:host { display: block; }
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 132px;
+  padding: 18px 20px 16px;
+  overflow: hidden;
+  background: var(--cf-superficie);
+  border: 1px solid var(--cf-borda-suave);
+  border-radius: var(--cf-raio);
+  box-shadow: var(--cf-sombra);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tile--clicavel:hover,
+.tile--clicavel:focus-within {
+  border-color: var(--cf-azul-acao);
+  box-shadow: var(--cf-sombra-realce);
+}
+
+.tile__topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.tile__textos { min-width: 0; }
+
+.tile__rotulo { margin: 0 0 6px; font-size: 0.8125rem; font-weight: 500; color: var(--cf-texto-secundario); }
+
+.tile__valor {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--cf-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.tile__sufixo { margin-left: 2px; font-size: 1.125rem; font-weight: 600; }
+
+.tile__badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  color: var(--cf-kpi-cor);
+  background: var(--cf-kpi-fundo);
+  border-radius: var(--cf-raio-pequeno);
+}
+
+.tile__logo { width: 26px; height: 26px; object-fit: contain; }
+
+.tile__badge mat-icon { width: 22px; height: 22px; font-size: 22px; }
+
+.tile__variacao { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 10px 0 0; font-size: 0.75rem; }
+.tile__seta { width: 16px; height: 16px; font-size: 16px; }
+.tile__delta { font-weight: 700; }
+.tile__comparativo { font-weight: 400; color: var(--cf-texto-secundario); }
+.tile__variacao--boa { color: var(--cf-aprovado); }
+.tile__variacao--ruim { color: var(--cf-reprovado); }
+.tile__variacao--neutra { color: var(--cf-texto-secundario); }
+
+.tile__detalhe { margin: 8px 0 0; font-size: 0.8125rem; color: var(--cf-texto-secundario); }
+
+.tile__sparkline { position: relative; height: 46px; margin: 12px -20px -16px; }
+
+.tile--clicavel .tile__sparkline { margin-bottom: 0; }
+
+.tile__pista {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 12px 0 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--cf-azul-acao);
+}
+
+.tile__pista mat-icon { width: 16px; height: 16px; font-size: 16px; }
+
+// Botão transparente sobre o card inteiro: área de clique total, rótulo só para leitor de tela.
+.tile__botao {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--cf-raio);
+  cursor: pointer;
+}
+
+.tile__botao:disabled { cursor: default; }
+
+.tile--neutro { --cf-kpi-cor: var(--cf-kpi-neutro); --cf-kpi-fundo: var(--cf-kpi-neutro-fundo); }
+.tile--aprovado { --cf-kpi-cor: var(--cf-kpi-aprovado); --cf-kpi-fundo: var(--cf-kpi-aprovado-fundo); }
+.tile--reprovado { --cf-kpi-cor: var(--cf-kpi-reprovado); --cf-kpi-fundo: var(--cf-kpi-reprovado-fundo); }
+.tile--atencao { --cf-kpi-cor: var(--cf-kpi-atencao); --cf-kpi-fundo: var(--cf-kpi-atencao-fundo); }

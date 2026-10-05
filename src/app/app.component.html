@@ -1,0 +1,14 @@
+<a class="pular-para-conteudo" href="#conteudo" (click)="$event.preventDefault(); alvo.focus()">Pular para o conteúdo</a>
+
+<header class="casca__topo">
+  <span class="casca__marca">ConforME</span>
+  <nav class="casca__menu" aria-label="Navegação principal">
+    <a routerLink="/inicio" routerLinkActive="ativo" ariaCurrentWhenActive="page">Início</a>
+    <a routerLink="/graficos-executivos" routerLinkActive="ativo" ariaCurrentWhenActive="page">Gráficos Executivos</a>
+  </nav>
+  <span class="casca__ambiente" *ngIf="!producao">ambiente local · dados mockados</span>
+</header>
+
+<div id="conteudo" tabindex="-1" #alvo>
+  <router-outlet></router-outlet>
+</div>

@@ -1,7 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import {
   BehaviorSubject,
-  MonoTypeOperatorFunction,
   Observable,
   Subject,
   catchError,
@@ -9,14 +8,14 @@ import {
   distinctUntilChanged,
   map,
   of,
-  scan,
   shareReplay,
   startWith,
   switchMap,
   takeUntil,
 } from 'rxjs';
 import { GraficosExecutivosService } from '../data/graficos-executivos.service';
-import { ErroCarregamento, mapearErro } from '../../../core/models/erro-carregamento.model';
+import { mapearErro } from '../../../core/models/erro-carregamento.model';
+import { Recurso, carregando, falhou, manterDadoAnterior, pronto } from '../../../core/models/recurso.model';
 import { FiltrosGraficos, Granularidade, filtrosIguais, filtrosPadrao } from '../models/filtros.model';
 
 /** Dimensões que os cards de composição conseguem recortar. */
@@ -28,48 +27,6 @@ import {
   PaginaDto,
   ParametrosPagina,
 } from '../models/graficos-executivos.dto';
-
-/** Envelope de carregamento usado por todos os blocos da tela. */
-export interface Recurso<T> {
-  /** Primeira carga: ainda não há nada para desenhar, a UI mostra skeleton. */
-  carregando: boolean;
-  /** Recarga: já existe dado anterior na tela, que permanece visível e esmaecido. */
-  atualizando: boolean;
-  dados: T | null;
-  erro: ErroCarregamento | null;
-}
-
-function carregando<T>(): Recurso<T> {
-  return { carregando: true, atualizando: false, dados: null, erro: null };
-}
-function pronto<T>(dados: T): Recurso<T> {
-  return { carregando: false, atualizando: false, dados, erro: null };
-}
-function falhou<T>(erro: ErroCarregamento): Recurso<T> {
-  return { carregando: false, atualizando: false, dados: null, erro };
-}
-
-/**
- * Stale-while-revalidate.
- *
- * Sem isto, cada troca de filtro (e cada clique de mês no gráfico) devolvia
- * `dados: null` e a página inteira virava skeleton — o layout encolhia e a
- * posição de rolagem saltava. Aqui a recarga preserva o último dado bom na
- * tela e apenas marca `atualizando`, então a altura da página não muda.
- *
- * Erro continua limpando os dados de propósito: melhor um estado de erro
- * explícito do que um número velho passando por atual.
- */
-function manterDadoAnterior<T>(): MonoTypeOperatorFunction<Recurso<T>> {
-  return scan((anterior: Recurso<T>, atual: Recurso<T>) => {
-    if (!atual.carregando) {
-      return atual;
-    }
-    return anterior.dados
-      ? { carregando: false, atualizando: true, dados: anterior.dados, erro: null }
-      : carregando<T>();
-  }, carregando<T>());
-}
 
 export const PAGINA_PADRAO: ParametrosPagina = {
   pagina: 0,

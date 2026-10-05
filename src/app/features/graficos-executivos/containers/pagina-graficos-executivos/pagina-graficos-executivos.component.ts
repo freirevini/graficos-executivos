@@ -16,7 +16,8 @@ import {
   PaginaDto,
   ParametrosPagina,
 } from '../../models/graficos-executivos.dto';
-import { DimensaoFiltravel, GraficosExecutivosStore, Recurso } from '../../state/graficos-executivos.store';
+import { Recurso } from '../../../../core/models/recurso.model';
+import { DimensaoFiltravel, GraficosExecutivosStore } from '../../state/graficos-executivos.store';
 
 interface VisaoPagina {
   filtros: FiltrosGraficos;

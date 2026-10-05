@@ -1,0 +1,47 @@
+<div class="tile" [ngClass]="'tile--' + tom" [class.tile--clicavel]="!!pista">
+  <div class="tile__topo">
+    <div class="tile__textos">
+      <p class="tile__rotulo">{{ rotulo }}</p>
+
+      <cf-skeleton *ngIf="carregando; else pronto" altura="34px" largura="70%"></cf-skeleton>
+
+      <ng-template #pronto>
+        <p class="tile__valor">
+          <span [iniContagem]="valor" [casas]="casas"></span><span class="tile__sufixo" *ngIf="sufixo && valor !== null">{{ sufixo }}</span>
+        </p>
+
+        <p class="tile__variacao" [ngClass]="classeVariacao" *ngIf="variacao">
+          <mat-icon class="tile__seta" aria-hidden="true">{{ icoVariacao }}</mat-icon>
+          <span class="tile__delta" aria-hidden="true">{{ textoVariacao }}</span>
+          <span class="tile__comparativo" aria-hidden="true">{{ comparativo }}</span>
+          <span class="apenas-leitor-tela">{{ leituraVariacao }}</span>
+        </p>
+
+        <p class="tile__detalhe" *ngIf="detalhe">{{ detalhe }}</p>
+      </ng-template>
+    </div>
+
+    <span class="tile__badge" aria-hidden="true">
+      <img class="tile__logo" *ngIf="logo; else iconeBadge" [src]="logo" alt="" />
+      <ng-template #iconeBadge><mat-icon>{{ icone }}</mat-icon></ng-template>
+    </span>
+  </div>
+
+  <div class="tile__sparkline" *ngIf="temSparkline && !carregando" aria-hidden="true">
+    <canvas baseChart type="line" [data]="dadosSparkline" [options]="opcoesSparkline"></canvas>
+  </div>
+
+  <p class="tile__pista" *ngIf="pista && !carregando" aria-hidden="true">
+    {{ pista }}<mat-icon>arrow_forward</mat-icon>
+  </p>
+
+  <button
+    *ngIf="pista"
+    class="tile__botao"
+    type="button"
+    aria-haspopup="dialog"
+    [disabled]="carregando || valor === null"
+    (click)="acionado.emit()">
+    <span class="apenas-leitor-tela">{{ leitura }}</span>
+  </button>
+</div>

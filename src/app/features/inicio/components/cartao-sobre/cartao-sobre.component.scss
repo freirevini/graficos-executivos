@@ -1,0 +1,15 @@
+.sobre {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--cf-texto-alt);
+}
+
+.sobre p { margin: 0; }
+
+.sobre__mantido-por {
+  font-size: 0.8125rem;
+  color: var(--cf-texto-secundario);
+}

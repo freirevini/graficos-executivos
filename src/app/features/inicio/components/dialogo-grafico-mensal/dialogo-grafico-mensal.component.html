@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>{{ titulo }}</h2>
+
+<mat-dialog-content class="grafico">
+  <div class="grafico__area" *ngIf="temDados; else semDados">
+    <canvas baseChart [data]="dados" [options]="opcoes" type="bar" role="img" [attr.aria-label]="descricao"></canvas>
+    <table class="tabela-alternativa-grafico">
+      <caption>{{ titulo }}</caption>
+      <thead><tr><th scope="col">Mês</th><th scope="col">Valor</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let linha of linhas"><th scope="row">{{ linha.rotulo }}</th><td>{{ linha.valor }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #semDados>
+    <p class="grafico__vazio">Ainda não há dados suficientes neste período.</p>
+  </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

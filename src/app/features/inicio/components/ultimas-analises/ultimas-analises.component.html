@@ -1,0 +1,23 @@
+<cf-card
+  titulo="Últimas análises"
+  [nivelTitulo]="2"
+  alturaCorpo="200px"
+  [carregando]="!recurso || recurso.carregando"
+  [atualizando]="!!recurso?.atualizando"
+  [erro]="recurso?.erro ?? null"
+  [vazio]="vazio"
+  mensagemVazio="Nenhuma peça avaliada ainda."
+  (tentarNovamente)="tentarNovamente.emit()">
+  <a acoes class="ver-todas" [routerLink]="rotaVerTodas">Ver todas<mat-icon aria-hidden="true">arrow_forward</mat-icon></a>
+
+  <ul class="lista">
+    <li class="lista__item" *ngFor="let item of itens">
+      <span class="lista__produto">{{ item.dto.produto.rotulo }}</span>
+      <time class="lista__quando" [attr.datetime]="item.dto.dataAvaliacao">{{ item.quando }}</time>
+      <span class="status" [class.status--aprovada]="item.aprovada" [class.status--reprovada]="!item.aprovada">
+        <mat-icon aria-hidden="true">{{ item.aprovada ? 'check_circle' : 'cancel' }}</mat-icon>
+        {{ item.aprovada ? 'Aprovada' : 'Reprovada' }}
+      </span>
+    </li>
+  </ul>
+</cf-card>

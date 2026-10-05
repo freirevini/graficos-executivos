@@ -24,11 +24,11 @@
 .seletor__opcao:hover { background: var(--cf-fundo); color: var(--cf-texto); }
 
 .seletor__opcao--ativo {
-  color: #fff;
+  color: var(--cf-texto-inverso);
   background: var(--cf-azul-acao);
 }
 
-.seletor__opcao--ativo:hover { background: var(--cf-azul-hover); color: #fff; }
+.seletor__opcao--ativo:hover { background: var(--cf-azul-hover); color: var(--cf-texto-inverso); }
 
 @media (max-width: 599px) {
   .seletor__opcao { padding: 6px 10px; font-size: 0.75rem; }

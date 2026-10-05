@@ -1,0 +1,13 @@
+.grafico__area {
+  position: relative;
+  height: 320px;
+  width: min(560px, 80vw);
+  max-width: 100%;
+}
+
+.grafico__vazio {
+  margin: 0;
+  padding: 32px 0;
+  text-align: center;
+  color: var(--cf-texto-secundario);
+}

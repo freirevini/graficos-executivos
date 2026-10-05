@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styles: [`
     .cf-skeleton {
       border-radius: var(--cf-raio-pequeno);
-      background: linear-gradient(90deg, #eceff1 25%, #f5f7f8 37%, #eceff1 63%);
+      background: linear-gradient(90deg, var(--cf-borda-suave) 25%, var(--cf-fundo) 37%, var(--cf-borda-suave) 63%);
       background-size: 400% 100%;
       animation: cf-brilho 1.4s ease infinite;
     }

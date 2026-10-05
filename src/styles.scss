@@ -1,0 +1,94 @@
+@use '@angular/material' as mat;
+@use 'paleta';
+
+// -----------------------------------------------------------------------------
+// TEMA ANGULAR MATERIAL 15
+//
+// O "Azul ação" do produto (#1976d2) é exatamente o Blue 700 do Material, e o
+// hover (#1565c0) e o escuro (#0d47a1) são o 800 e o 900 — por isso a primária
+// reaproveita a paleta nativa em vez de recriar uma. O acento usa o magenta da
+// marca BV.
+//
+// PONTO DE INTEGRAÇÃO: no projeto real o tema provavelmente já vem do chassi
+// (@arqt/ng15-ui / Foundation UI). Nesse caso, apague este bloco de tema e
+// mantenha apenas `@use 'paleta'` + os estilos utilitários do final do arquivo.
+// -----------------------------------------------------------------------------
+
+@include mat.core();
+
+$cf-magenta: (
+  50: #fbe8ee, 100: #f5c5d3, 200: #e89fb4, 300: #d97894, 400: #cc5a7c,
+  500: #bf3f66, 600: #a3225c, 700: #8e1c4f, 800: #7a1642, 900: #5c0e30,
+  A100: #ff8aa8, A200: #ff5c85, A400: #d42245, A700: #b71a37,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87), 100: rgba(0, 0, 0, 0.87), 200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87), 400: #ffffff, 500: #ffffff, 600: #ffffff,
+    700: #ffffff, 800: #ffffff, 900: #ffffff,
+    A100: rgba(0, 0, 0, 0.87), A200: #ffffff, A400: #ffffff, A700: #ffffff,
+  ),
+);
+
+$cf-primaria: mat.define-palette(mat.$blue-palette, 700, 500, 900);
+$cf-acento: mat.define-palette($cf-magenta, 600, 300, 900);
+$cf-aviso: mat.define-palette(mat.$red-palette, 700);
+
+$cf-tema: mat.define-light-theme((
+  color: (primary: $cf-primaria, accent: $cf-acento, warn: $cf-aviso),
+  typography: mat.define-typography-config($font-family: "'Roboto', 'Helvetica Neue', Arial, sans-serif"),
+  density: 0,
+));
+
+@include mat.all-component-themes($cf-tema);
+
+// -----------------------------------------------------------------------------
+// BASE
+// -----------------------------------------------------------------------------
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cf-fundo);
+  color: var(--cf-texto);
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Foco sempre visível no teclado, inclusive sobre elementos do Material.
+:focus-visible {
+  outline: 3px solid var(--cf-azul-acao);
+  outline-offset: 2px;
+}
+
+// Respeita quem pediu menos movimento no sistema operacional.
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// UTILITÁRIOS
+// -----------------------------------------------------------------------------
+
+/** Conteúdo lido por leitor de tela, invisível na tela. */
+.apenas-leitor-tela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/** Tabela-resumo que acompanha cada gráfico (alternativa textual acessível). */
+.tabela-alternativa-grafico {
+  @extend .apenas-leitor-tela;
+}

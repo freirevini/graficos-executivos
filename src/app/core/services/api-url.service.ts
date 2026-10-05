@@ -14,4 +14,9 @@ export class ApiUrlService {
   graficosExecutivos(sufixo = ''): string {
     return `${environment.api.baseUrl}${environment.api.graficosExecutivos}${sufixo}`;
   }
+
+  /** Ex.: `/api/inicio/resumo`. */
+  inicio(sufixo = ''): string {
+    return `${environment.api.baseUrl}${environment.api.inicio}${sufixo}`;
+  }
 }

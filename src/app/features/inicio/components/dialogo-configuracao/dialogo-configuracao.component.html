@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Como a IA foi configurada</h2>
+
+<mat-dialog-content class="detalhe">
+  <p class="detalhe__intro">
+    A avaliação usa a técnica <strong>RAG</strong> (geração aumentada por recuperação): cada peça é
+    analisada com base nas <strong>regras de compliance e de negócio</strong> do projeto, consultadas
+    numa base de conhecimento, e não só no conhecimento geral do modelo.
+  </p>
+
+  <section class="detalhe__secao">
+    <h3 id="cfg-rag">Base de conhecimento (RAG)</h3>
+    <ul class="detalhe__chips" aria-labelledby="cfg-rag">
+      <li>Regras de compliance</li>
+      <li>Regras de negócio</li>
+    </ul>
+  </section>
+
+  <section class="detalhe__secao">
+    <h3 id="cfg-agentes">Agentes em sequência</h3>
+    <ol class="detalhe__agentes" aria-labelledby="cfg-agentes">
+      <li class="agente" *ngFor="let agente of agentes">
+        <span class="agente__ordem" aria-hidden="true">{{ agente.ordem }}</span>
+        <div class="agente__corpo">
+          <div class="agente__cabecalho">
+            <h4 class="agente__titulo">{{ agente.titulo }}</h4>
+            <span class="agente__modelo" *ngIf="agente.modelo as m">
+              {{ m.rotulo }}<ng-container *ngIf="m.versao"> · v{{ m.versao }}</ng-container>
+            </span>
+          </div>
+          <p class="agente__funcao">{{ agente.funcao }}</p>
+          <p class="agente__entrega"><span>Entrega</span>{{ agente.entrega }}</p>
+        </div>
+      </li>
+    </ol>
+    <p class="detalhe__fluxo">Fluxo: peça → agente de triagem → agente avaliador → resultado estruturado.</p>
+    <button mat-stroked-button color="primary" type="button" class="detalhe__ficha" *ngIf="temGemini" (click)="abrirFichaGemini()">
+      Ficha e benchmark dos modelos Gemini
+    </button>
+  </section>
+
+  <section class="detalhe__secao">
+    <h3>Desempenho e versão</h3>
+    <dl class="detalhe__meta">
+      <div>
+        <dt>Tempo médio por peça</dt>
+        <dd>{{ formatarTempo(configuracao.tempoMedioSegundos) }}</dd>
+      </div>
+      <div>
+        <dt>Versão do prompt</dt>
+        <dd>{{ configuracao.versaoPrompt }}</dd>
+      </div>
+      <div>
+        <dt>Janela de dados</dt>
+        <dd>
+          {{ configuracao.janelaDados.de | date: 'dd/MM/yyyy' : undefined : 'pt-BR' }}
+          –
+          {{ configuracao.janelaDados.ate | date: 'dd/MM/yyyy' : undefined : 'pt-BR' }}
+        </dd>
+      </div>
+      <div>
+        <dt>Atualizado em</dt>
+        <dd>{{ configuracao.atualizadoEm | date: "dd/MM/yyyy 'às' HH:mm" : undefined : 'pt-BR' }}</dd>
+      </div>
+    </dl>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

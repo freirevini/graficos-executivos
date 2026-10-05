@@ -1,0 +1,47 @@
+<div mat-dialog-title class="cabecalho">
+  <span class="cabecalho__logo" aria-hidden="true">✦</span>
+  <span class="cabecalho__nome">Gemini</span>
+</div>
+
+<mat-dialog-content class="lista">
+  <article class="modelo" *ngFor="let item of modelos">
+    <header class="modelo__cabecalho">
+      <h3 class="modelo__nome">{{ item.modelo.rotulo }}</h3>
+      <span class="modelo__percentual">{{ item.modelo.participacaoPercentual | number: '1.0-1' : 'pt-BR' }}%</span>
+    </header>
+
+    <p class="modelo__papel">{{ item.modelo.papel }}</p>
+
+    <div class="modelo__versao" *ngIf="item.modelo.versao || item.modelo.dataLancamento">
+      <span *ngIf="item.modelo.versao">v{{ item.modelo.versao }}</span>
+      <span *ngIf="item.modelo.versao && item.modelo.dataLancamento">·</span>
+      <span *ngIf="item.modelo.dataLancamento">{{ item.modelo.dataLancamento }}</span>
+    </div>
+
+    <div class="modelo__benchmark" *ngIf="item.benchmark as b; else semBenchmark">
+      <div class="metrica" *ngIf="b.intelligenceIndex !== null">
+        <span class="metrica__valor">{{ b.intelligenceIndex }}</span>
+        <span class="metrica__rotulo">Intelligence Index</span>
+      </div>
+      <div class="metrica" *ngIf="b.velocidadeTokensPorSegundo !== null">
+        <span class="metrica__valor">{{ b.velocidadeTokensPorSegundo }}</span>
+        <span class="metrica__rotulo">tokens/s</span>
+      </div>
+      <div class="metrica" *ngIf="b.custoPorTarefaUsd !== null">
+        <span class="metrica__valor">{{ b.custoPorTarefaUsd | currency: 'USD' : 'symbol' : '1.2-2' : 'pt-BR' }}</span>
+        <span class="metrica__rotulo">por tarefa</span>
+      </div>
+    </div>
+    <ng-template #semBenchmark>
+      <p class="modelo__sem-benchmark">Preview — ainda sem benchmark independente publicado.</p>
+    </ng-template>
+  </article>
+
+  <a class="fonte" [href]="urlBenchmark" target="_blank" rel="noopener">
+    Ver benchmark completo na Artificial Analysis ↗
+  </a>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

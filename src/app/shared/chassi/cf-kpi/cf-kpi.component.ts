@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { ChartConfiguration, ChartData } from 'chart.js';
 
+const FORMATO_PERCENTUAL = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
 export type TomKpi = 'neutro' | 'aprovado' | 'reprovado' | 'atencao';
 
 /**
@@ -80,7 +82,7 @@ export class CfKpiComponent implements OnChanges {
   get leituraVariacao(): string {
     if (this.variacaoEhNeutra) { return 'estável em relação ao período anterior'; }
     const sentido = this.variacaoEhPositiva ? 'aumento' : 'queda';
-    return `${sentido} de ${Math.abs(this.variacaoPercentual ?? 0).toFixed(1)} por cento ${this.descricaoComparativo}`;
+    return `${sentido} de ${FORMATO_PERCENTUAL.format(Math.abs(this.variacaoPercentual ?? 0))} por cento ${this.descricaoComparativo}`;
   }
 
   private montarSparkline(): ChartData<'line', number[], string> {

@@ -114,6 +114,11 @@
   --grf-tooltip-fundo: #212121;
   --grf-realce: #f57f17; // contorno do mês selecionado no cross-filter
 
+  // --- Texto e superfícies sobre fundo de marca (topo, hero, CTA) ------------
+  --cf-texto-inverso: #ffffff;
+  --cf-sobreposicao-escura: rgba(0, 0, 0, 0.15); // escurece o gradiente BV: branco >= 4,5:1
+  --cf-realce-inverso: rgba(255, 255, 255, 0.18);
+
   // --- Layout --------------------------------------------------------------
   --cf-raio: 12px;
   --cf-raio-pequeno: 8px;

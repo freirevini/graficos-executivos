@@ -38,10 +38,10 @@ export class LeitorPaletaService {
   }
 
   /** Série "aprovadas" dos gráficos — azul institucional, não o verde de status. */
-  get aprovada(): string { return this.token('--grf-aprovadas', '#002bab'); }
-  get reprovada(): string { return this.token('--grf-reprovadas', '#c62828'); }
+  get aprovada(): string { return this.token('--grf-aprovadas', '#3f5fc9'); }
+  get reprovada(): string { return this.token('--grf-reprovadas', '#cc6363'); }
   /** Linha de % de reprovação no gráfico de correlação. */
-  get linhaPercentual(): string { return this.token('--grf-linha-percentual', '#93aede'); }
+  get linhaPercentual(): string { return this.token('--grf-linha-percentual', '#c9a13c'); }
   get acao(): string { return this.token('--cf-azul-acao', '#1976d2'); }
   get realce(): string { return this.token('--grf-realce', '#f57f17'); }
   get grade(): string { return this.token('--grf-grade', '#eceff1'); }
